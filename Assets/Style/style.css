@@ -18,3 +18,15 @@ h2{
     font-size: x-large;
     text-align: center;
 }
+
+.column{
+    border: black 1px solid;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 15px;
+}
+
+.footer{
+    padding: 1em;
+    padding-bottom: 1em;
+}
