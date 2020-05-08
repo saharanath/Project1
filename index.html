@@ -24,28 +24,66 @@
     <section class="section">
       <div class="container">
         <h2>
-            this is where our form element will be
+            <strong> we ask you a couple questions about what you hope your hiking experience
+            will be like?</strong>
         </h2>
         
         <br>
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <label class="label">How far are you willing to drive to this hike?</label>
+              <div class="control">
+                <input class="input maxDistance" type="text" placeholder="15 miles">
+              </div>
+            </div>
+          </div>
+        
+          <div class="column">
+            <div class="field">
+              <label class="label">How many miles do you want to hike?</label>
+              <div class="control">
+                <input class="input minLength" type="text" placeholder="4 miles">
+              </div>
+            </div>
 
-        <h3>here are a couple inputs</h3>
-        <p>How many miles from your house do you want to search hikes for?</p>
-         <input id= "maxDistance">
-         <p>How far do you want to hike?</p>
-         <input id="minLength">
-         <p>what is the minimum number of stars for your hike?</p>
-         <input id="minStars">
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label class="label">Whats the minimum rating for your hike?</label>
+              <div class="control">
+                <div class="select minStar">
+                  <select>
+                    <option>0 stars</option>
+                    <option>⭐</option>
+                    <option>⭐⭐</option>
+                    <option>⭐⭐⭐</option>
+                    <option>⭐⭐⭐⭐</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
 
       </div>
     </section>
 
     <section class="section">
+      <div class="container">
         <div class="columns">
           <div class="column">
               <h2>
-                This is where we will display our hiking data
+                This is where we will display our Hiking Data
               </h2>
+              <div class="location"></div>
+              <div class="ascent"></div>
+              <div class="descent"></div>
+              <div class="length"></div>
+              <div class="stars"></div>
+              <div class="difficutly"></div>
+              <div class="conditionStatus"></div>
+              <div class="conditionDate"></div>
           </div>
           <div class="column">
             <h2>
@@ -66,7 +104,8 @@
                 <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
                 is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
             </p>
-        </div>  
+        </div> 
+      </div> 
     </footer>
 
     <script src="./Assets/Script/script.js"></script>
