@@ -18,7 +18,7 @@
         var iconURL = ("http://openweathermap.org/img/w/" + currentIcon + ".png");
         console.log(iconURL)
 
-        $(".currentTemp").text("Temperature: " + currentTemp " F");
+        $(".currentTemp").text("Temperature: " + currentTemp + " F");
         $(".currentIcon").attr("src", iconURL); 
         $(".currentWindSpeed").text("Wind Speed: " + currentWindSpeed + " MPH");
         $(".currentHumidity").text("Humidity: " + currentHumidity + "%");
