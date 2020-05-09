@@ -24,67 +24,60 @@
     <section class="section">
       <div class="container">
         <h2>
-            this is where our form element will be
+            <strong> we ask you a couple questions about what you hope your hiking experience
+            will be like?</strong>
         </h2>
         
         <br>
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <label class="label">How far are you willing to drive to this hike?</label>
+              <div class="control">
+                <input class="input maxDistance" type="text" placeholder="15 miles">
+              </div>
+            </div>
+          </div>
+        
+          <div class="column">
+            <div class="field">
+              <label class="label">How many miles do you want to hike?</label>
+              <div class="control">
+                <input class="input minLength" type="text" placeholder="4 miles">
+              </div>
+            </div>
 
-        <h3>here are a couple inputs</h3>
-        <p>How many miles from your house do you want to search hikes for?</p>
-         <input id= "maxDistance">
-         <p>How far do you want to hike?</p>
-         <input id="minLength">
-         <p>what is the minimum number of stars for your hike?</p>
-         <input id="minStars">
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label class="label">Whats the minimum rating for your hike?</label>
+              <div class="control">
+                <div class="select minStar">
+                  <select>
+                    <option>0 stars</option>
+                    <option>⭐</option>
+                    <option>⭐⭐</option>
+                    <option>⭐⭐⭐</option>
+                    <option>⭐⭐⭐⭐</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
 
       </div>
     </section>
 
     <section class="section">
-      <div class="columns">
-        <h3>
-            Supercharge Project
-        </h3>
-        <br>
-        <p>
-          Altius institute has world class TALEN and TALE-TF production capabilities. TALENs are transcription activator
-          like effector nucleases, which are restriction enzymes that are designed to cut DNA with very high specificity. 
-          TALEs are delivered into cells through electroporation, electric shock that momentarily blows holes in cells, so
-          the TALE mRNA can enter or through the use of retroviral vectors. Electroporation is harsh on the cells leading to 
-          lower cell viability and some changes in cellular physiology. Retroviral vectors can be limited in their efficacy as 
-          there are carrying capacity constriants and synthesis of these viruses can be difficult.
-        </p>
-        <br>
-        <p>
-          Altius is working toward the development of reagents that will allow for the delivery of TALEs through the employment
-          of supercharge principles. Supercharging is a technique developed by <a href="https://liugroup.us/">the Liu Lab</a> at
-          Harvard University. This technique allows for transportation of reagents across the cell membrane through the user of 
-          highly charged moieties.
-        </p>
-      </section>
-        <section>
 
-  <div class="location">Location:</div>
-  <div class="ascent">Ascent: </div>
-  <div class="descent">Descent: </div>
-  <div class="length">Length: </div>
-  <div class="stars">Stars: </div>
-  <div class="difficulty">Difficulty:</div>
-  <div class="conditionStatus">Condition Status: </div>
-  <div class="conditionDate">Condition Date: </div>
-  
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="script.js"></script>
-  </body>
-        </p>
-       </div>
     </section>
 
 
     <footer class="footer">
         <div class="content has-text-centered">
             <p>
-                Lets Hike powered by Someone or Something really powerful
+                Lets Hike! powered by Someone or Something really powerful
             </p>
 
             <p>
@@ -92,7 +85,8 @@
                 <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
                 is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
             </p>
-        </div>  
+        </div> 
+      </div> 
     </footer>
 
     <script src="./Assets/Script/script.js"></script>
