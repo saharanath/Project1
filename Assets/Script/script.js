@@ -26,9 +26,9 @@ navigator.geolocation.getCurrentPosition(function (location) {
             console.log(response);
 
             $(".location").html(" Location:" + response.trails[0].location);
-            $(".ascent").text("Ascent: " + response.trails[0].ascent);
-            $(".descent").text("Descent: " + response.trails[0].descent);
-            $(".length").text("Length: " + response.trails[0].length);
+            $(".ascent").text("Ascent: " + response.trails[0].ascent + "ft");
+            $(".descent").text("Descent: " + response.trails[0].descent + "ft");
+            $(".length").text("Length: " + response.trails[0].length + "mi");
             $(".stars").text("Stars: " + response.trails[0].stars);
             parseDifficulty(response.trails[0].difficulty);
             $(".conditionStatus").text("Condition Status: " + response.trails[0].conditionStatus);
