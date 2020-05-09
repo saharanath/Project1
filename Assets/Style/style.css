@@ -1,20 +1,54 @@
+/* header */
+
 h1{
     font-size: 75px;
     text-align: center;
 }
 
 html{
-    background-color: aqua;
+    background-color: lightblue;
 }
 
+/* main */
 .container{
     border-radius: 15px;
     border: black 1px solid;
     padding: 1em;
+    background-color: mediumseagreen;
 
 }
 
 h2{
     font-size: x-large;
     text-align: center;
+}
+
+.column{
+    border: black 1px solid;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 15px;
+}
+
+
+.section{
+    padding-top: 1em;
+}
+
+.column{
+    background-color: mintcream;
+}
+
+#maxDistance{
+    border-radius: 2px;
+}
+
+
+
+
+/* footer */
+.footer{
+    padding: 1em;
+    padding-bottom: 1em;
+    background-color: cornflowerblue;
 }
