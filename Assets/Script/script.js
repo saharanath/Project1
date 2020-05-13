@@ -27,8 +27,8 @@ $("#submitButton").on("click", function(){
         .then(function (response) {
             console.log(response);
 
-            $(".name").html("Trail Name :" + response. trails[0].name);
-            $(".location").html(" Location:" + response.trails[0].location);
+            $(".name").html("Trail Name: " + response. trails[0].name);
+            $(".location").html("Location: " + response.trails[0].location);
             $(".ascent").text("Ascent: " + response.trails[0].ascent + "ft");
             $(".descent").text("Descent: " + response.trails[0].descent + "ft");
             $(".length").text("Length: " + response.trails[0].length + "mi");
