@@ -34,14 +34,11 @@ $("#submitButton").on("click", function(){
             $(".length").text("Length: " + response.trails[0].length + "mi");
             $(".stars").text("Stars: " + response.trails[0].stars);
             parseDifficulty(response.trails[0].difficulty);
-            $(".conditionStatus").text("Condition Status: " + response.trails[0].conditionStatus);
-           
 
             console.log("Name: " + response.trails[0].name);
             console.log("Length: " + response.trails[0].length);
             console.log("Stars: " + response.trails[0].stars);
             console.log("Difficulty: " + response.trails[0].difficulty)
-
 
         });
 
