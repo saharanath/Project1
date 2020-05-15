@@ -25,6 +25,7 @@ navigator.geolocation.getCurrentPosition(function (currentLocation) {
 function getTrails(i) {
     maxDistance = $(".maxDistance").val();
     minLength = $(".minLength").val();
+    minStars = $("minStar").children("option:selected").val();
     console.log(setLocation.coords.longitude);
     console.log($(".minStar").val());
     console.log(maxDistance);
