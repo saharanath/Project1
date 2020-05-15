@@ -54,7 +54,9 @@ h2{
 
 /* footer */
 .footer{
-    padding: 1em;
-    padding-bottom: 1em;
-    background-color: cornflowerblue;
+    background-color: #3273dc;
+}
+
+a{
+    color: white;
 }
