@@ -8,11 +8,19 @@ var trails;
 var setLocation;
 
 navigator.geolocation.getCurrentPosition(function (currentLocation) {
-    setLocation = currentLocation;
-})
-
-
-// $("button").on("click", getTrails);
+        setLocation = currentLocation;
+    },
+    function () {
+        setLocation = {
+            coords: {
+                latitude: 47.6062,
+                longitude: -122.3321
+            }
+        }
+    })
+//     https://www.hikingproject.com/data/get-trails?lat=47.68399360000001&lon=-122.2148096&maxDistance=&minLength=&minStars=1&key=200749192-819757ad274cc592a221c4c70b9c441e
+//     https://www.hikingproject.com/data/get-trails?lat=122.3321&lon=47.6062&maxDistance=12&minLength=1&minStars=1&key=200749192-819757ad274cc592a221c4c70b9c441e
+// // $("button").on("click", getTrails);
 
 function getTrails(i) {
     maxDistance = $(".maxDistance").val();
@@ -67,19 +75,19 @@ function parseDifficulty(difficulty) {
 }
 
 
-$("#submitButton").on("click", function(params){
+$("#submitButton").on("click", function (params) {
     params.preventDefault()
     var startIndex = 0;
     getTrails(startIndex);
 })
-$(".nextButton").on("click", function(params){
+$(".nextButton").on("click", function (params) {
     params.preventDefault();
     var increaseIndex = i++
     if (i >= trails.length) {
         i = 0
     }
     getTrails(increaseIndex);
-})    
+})
 
 
 function fetchWeather(city) {
