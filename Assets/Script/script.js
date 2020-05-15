@@ -1,33 +1,31 @@
 // 
 
 navigator.geolocation.getCurrentPosition(function (location) {
-
     var maxDistance;
     var minLength;
     var minStars;
     var apiKey = "key=200749192-819757ad274cc592a221c4c70b9c441e";
     var i = 0;
     var trails;
-    $("button").on("click", getTrails);
-
-    function getTrails(event) {
+    // $("button").on("click", getTrails);
+    function getTrails(i) {
         maxDistance = $(".maxDistance").val();
         minLength = $(".minLength").val();
-console.log(location.coords.longitude);
+        console.log(location.coords.longitude);
         console.log($(".minStar").val());
         console.log(maxDistance);
         console.log(minLength);
         var queryURL = "https://www.hikingproject.com/data/get-trails?" +
             "lat=" + location.coords.latitude + "&lon=" + location.coords.longitude +
             "&maxDistance=" + maxDistance + "&minLength=" + minLength + "&minStars=" + minStars + "&" + apiKey;
-
-        event.preventDefault();
+        // event.preventDefault();
         $.ajax({
                 url: queryURL,
                 method: "GET"
             })
             .then(function (response) {
                 trails = response.trails
+                console.log(response)
                 console.log(queryURL)
                 $(".name").html("Trail Name: " + response.trails[i].name);
                 $(".location").html("Location: " + response.trails[i].location);
@@ -36,16 +34,13 @@ console.log(location.coords.longitude);
                 $(".length").text("Length: " + response.trails[i].length + "mi");
                 $(".stars").text("Stars: " + response.trails[i].stars);
                 parseDifficulty(response.trails[i].difficulty);
-
-                i++;
-                if (i === trails.length) {
-                    i = 0
-                }
-
+                // i++;
+                // if (i === trails.length) {
+                //     i = 0
+                // }
                 fetchWeather(response.trails[i].location);
             });
     }
-
     function parseDifficulty(difficulty) {
         var difficultyLevel;
         if (difficulty === "green") {
@@ -58,19 +53,27 @@ console.log(location.coords.longitude);
             difficultyLevel = "Hard";
         }
         $(".difficulty").text("Difficulty: " + difficultyLevel);
-
     }
+    $("#submitButton").on("click", function(params){
+        params.preventDefault()
+        var startIndex = 0;
+        getTrails(startIndex);
+    $(".nextButton").on("click", function(params){
+        params.preventDefault();
+        var increaseIndex = i++
+        if (i === trails.length) {
+            i = 0
+        }
+        getTrails(increaseIndex)
+    })    
+    })
 })
 
 function fetchWeather(city) {
     var city;
     var apiKey = "eab6d01fa24f92ffa99be7e88ac10b4b";
-
     var cityAPIUrl = ("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey);
-
-
     // var weatherQueryURL = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + location.coords.latitude + "&lon=" + location.coords.longitude + "&units=imperial&exclude=hourly&appid=" + apiKey);
-
     $.ajax({
         url: cityAPIUrl,
         method: "GET"
@@ -81,17 +84,13 @@ function fetchWeather(city) {
         // currentPercipitation 
         var currentHumidity = response.main.humidity;
         var iconURL = ("http://openweathermap.org/img/w/" + currentIcon + ".png");
-
-
         $(".currentTemp").text("Temperature: " + currentTemp + " F");
         $(".currentIcon").attr("src", iconURL);
         $(".currentWindSpeed").text("Wind Speed: " + currentWindSpeed + " MPH");
         $(".currentHumidity").text("Humidity: " + currentHumidity + "%");
-
-
     })
-
 }
+
 // });
 // // var lon= geolocation.getCurrentPosition();
 // // var lat= position.coords.latitude;
