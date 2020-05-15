@@ -1,52 +1,67 @@
-// Hiking API Format
-// https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=YOUR_KEY_HERE
-
-
 // 
+var maxDistance;
+var minLength;
+var minStars;
+var apiKey = "key=200749192-819757ad274cc592a221c4c70b9c441e";
+var i = 0;
+var trails;
+var setLocation;
 
-navigator.geolocation.getCurrentPosition(function (location) {
-    console.log(location.coords.latitude);
-    console.log(location.coords.longitude);
+navigator.geolocation.getCurrentPosition(function (currentLocation) {
+        setLocation = currentLocation;
+    },
+    function () {
+        setLocation = {
+            coords: {
+                latitude: 47.6062,
+                longitude: -122.3321
+            }
+        }
+    })
+//     https://www.hikingproject.com/data/get-trails?lat=47.68399360000001&lon=-122.2148096&maxDistance=&minLength=&minStars=1&key=200749192-819757ad274cc592a221c4c70b9c441e
+//     https://www.hikingproject.com/data/get-trails?lat=122.3321&lon=47.6062&maxDistance=12&minLength=1&minStars=1&key=200749192-819757ad274cc592a221c4c70b9c441e
+// // $("button").on("click", getTrails);
 
-    var userDistance = "";
-    var maxDistance = "maxDistance=" + userDistance;
-    var userLength = "";
-    var minLength = "minLength=" + userLength;
-    var userStars = ""; //0-4
-    var minStars = "minStars=" + userStars;
-    var apiKey = "key=200749192-819757ad274cc592a221c4c70b9c441e";
+function getTrails(i) {
+    maxDistance = $(".maxDistance").val();
+    minLength = $(".minLength").val();
+    minStars = $("minStar").children("option:selected").val();
+    console.log(setLocation.coords.longitude);
+    console.log($(".minStar").val());
+    console.log(maxDistance);
+    console.log(minLength);
+    var queryURL = "https://www.hikingproject.com/data/get-trails?" +
+        "lat=" + setLocation.coords.latitude + "&lon=" + setLocation.coords.longitude +
+        "&maxDistance=" + maxDistance + "&minLength=" + minLength + "&minStars=" + minStars + "&" + apiKey;
 
-    var queryURL = "https://www.hikingproject.com/data/get-trails?" + "lat=" + location.coords.latitude + "&lon=" + location.coords.longitude + "&" + maxDistance + "&" + minLength + "&" + minStars + "&" + apiKey;
-
+    // event.preventDefault();
     $.ajax({
             url: queryURL,
             method: "GET"
         })
         .then(function (response) {
-            console.log(response);
+            trails = response.trails
+            console.log(response)
+            console.log(queryURL)
+            $(".name").html("Trail Name: " + response.trails[i].name);
+            $(".location").html("Location: " + response.trails[i].location);
+            $(".ascent").text("Ascent: " + response.trails[i].ascent + "ft");
+            $(".descent").text("Descent: " + response.trails[i].descent + "ft");
+            $(".length").text("Length: " + response.trails[i].length + "mi");
+            $(".stars").text("Stars: " + response.trails[i].stars);
+            parseDifficulty(response.trails[i].difficulty);
 
-            $(".location").html(" Location:" + response.trails[0].location);
-            $(".ascent").text("Ascent: " + response.trails[0].ascent);
-            $(".descent").text("Descent: " + response.trails[0].descent);
-            $(".length").text("Length: " + response.trails[0].length);
-            $(".stars").text("Stars: " + response.trails[0].stars);
-            parseDifficulty(response.trails[0].difficulty);
-            $(".conditionStatus").text("Condition Status: " + response.trails[0].conditionStatus);
-            $(".conditionDate").text("Condition Date: " + response.trails[0].conditionDate);
+            // i++;
+            // if (i === trails.length) {
+            //     i = 0
+            // }
 
-            console.log("Name: " + response.trails[0].name);
-            console.log("Length: " + response.trails[0].length);
-            console.log("Stars: " + response.trails[0].stars);
-            console.log("Difficulty: " + response.trails[0].difficulty)
-
-
+            fetchWeather(response.trails[i].location);
         });
-
-    console.log(queryURL);
-});
+}
 
 function parseDifficulty(difficulty) {
-var difficultyLevel;
+    var difficultyLevel;
     if (difficulty === "green") {
         difficultyLevel = "Easy";
     }
@@ -57,18 +72,90 @@ var difficultyLevel;
         difficultyLevel = "Hard";
     }
     $(".difficulty").text("Difficulty: " + difficultyLevel);
-            
+
 }
-// var lon= geolocation.getCurrentPosition();
-// var lat= position.coords.latitude;
 
 
-// AJAX call to Hiking API
+$("#submitButton").on("click", function (params) {
+    params.preventDefault()
+    var startIndex = 0;
+    getTrails(startIndex);
+})
+$(".nextButton").on("click", function (params) {
+    params.preventDefault();
+    var increaseIndex = i++
+    if (i >= trails.length) {
+        i = 0
+    }
+    getTrails(increaseIndex);
+})
 
-// We store all of the retrieved data inside of an object called "response"
+
+function fetchWeather(city) {
+    var city;
+    var apiKey = "eab6d01fa24f92ffa99be7e88ac10b4b";
+
+    var cityAPIUrl = ("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey);
 
 
-// Transfer content to HTML
+    // var weatherQueryURL = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + location.coords.latitude + "&lon=" + location.coords.longitude + "&units=imperial&exclude=hourly&appid=" + apiKey);
+
+    $.ajax({
+        url: cityAPIUrl,
+        method: "GET"
+    }).then(function (response) {
+        var currentTemp = response.main.temp;
+        var currentIcon = response.weather[0].icon;
+        var currentWindSpeed = response.wind.speed;
+        // currentPercipitation 
+        var currentHumidity = response.main.humidity;
+        var iconURL = ("http://openweathermap.org/img/w/" + currentIcon + ".png");
 
 
-// Logs
+        $(".currentTemp").text("Temperature: " + currentTemp + " F");
+        $(".currentIcon").attr("src", iconURL);
+        $(".currentWindSpeed").text("Wind Speed: " + currentWindSpeed + " MPH");
+        $(".currentHumidity").text("Humidity: " + currentHumidity + "%");
+
+
+    })
+
+}
+// });
+// // var lon= geolocation.getCurrentPosition();
+// // var lat= position.coords.latitude;
+
+// //*7 days
+// var extendedForecastTemp1 = response.daily[1].temp.max;
+// console.log(extendedForecastTemp1)
+// var extendedForecastWeatherDescription1 = response.daily[1].weather[0].description;
+// // $('selector').text(str.charAt(0).toUpperCase() + str.substr(1).toLowerCase())
+// console.log(extendedForecastWeatherDescription1)
+
+// var extendedForecastTemp2 = response.daily[2].temp.max;
+// var extendedForecastWeatherDescription2 = response.daily[2].weather[0].description;
+// var extendedForecastTemp3 = response.daily[3].temp.max;
+// var extendedForecastWeatherDescription3 = response.daily[3].weather[0].description;
+// var extendedForecastTemp4 = response.daily[4].temp.max;
+// var extendedForecastWeatherDescription4 = response.daily[4].weather[0].description;
+// var extendedForecastTemp5 = response.daily[5].temp.max;
+// var extendedForecastWeatherDescription5 = response.daily[5].weather[0].description;
+// var extendedForecastTemp6 = response.daily[6].temp.max;
+// var extendedForecastWeatherDescription6 = response.daily[6].weather[0].description;
+// var extendedForecastTemp7 = response.daily[7].temp.max;
+// var extendedForecastWeatherDescription7 = response.daily[7].weather[0].description;
+
+// $(".extendedForecastTemp").append(extendedForecastTemp1)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription1)
+// $(".extendedForecastTemp").append(extendedForecastTemp2)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription2)
+// $(".extendedForecastTemp").append(extendedForecastTemp3)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription3)
+// $(".extendedForecastTemp").append(extendedForecastTemp4)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription4)
+// $(".extendedForecastTemp").append(extendedForecastTemp5)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription5)
+// $(".extendedForecastTemp").append(extendedForecastTemp6)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription6)
+// $(".extendedForecastTemp").append(extendedForecastTemp7)
+// $(".extendedForecastDescription").append(extendedForecastWeatherDescription7)
