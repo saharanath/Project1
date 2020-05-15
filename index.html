@@ -55,11 +55,11 @@
               <div class="control">
                 <div class="select minStar">
                   <select>
-                    <option>0 stars</option>
-                    <option>⭐</option>
-                    <option>⭐⭐</option>
-                    <option>⭐⭐⭐</option>
-                    <option>⭐⭐⭐⭐</option>
+                    <option value="0">0 stars</option>
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
                   </select>
                 </div>
               </div>
@@ -91,8 +91,8 @@
                 <div class="stars">Stars: </div>
                 <div class="difficulty">Difficulty:</div>
                 <br>
+                <button class ="button is-link nextButton">Next Hike</button>
 
-                <button class="button is-link" id="next">Next Hike</button>
             </div>
   
             <div class="column">
@@ -100,11 +100,14 @@
                   Weather Information for Hike location
               </h2>
               <div class="currentTemp">Temperature:</div>
-              <div class="currentIcon">
-                <img src="" alt="Weather icon">
+              <div class="Icon">
+                <img class="currentIcon" src="" alt="Weather icon">
               </div>
               <div class="currentWindSpeed">Current Wind Speed: </div>
               <div class="currentHumidity">Current Humidity: </div>
+              <div class="extendedForecastTemp"></div>
+              <div class="extendedForecastDescription"></div>
+              
             </div>
           </div>
     </section>
@@ -126,7 +129,6 @@
     </footer>
 
     <script src="./Assets/Script/script.js"></script>
-    <script src="./Assets/Script/weather-api.js"></script>
   </body>
   
 
