@@ -95,7 +95,7 @@ function fetchWeather(city) {
     var city;
     var apiKey = "eab6d01fa24f92ffa99be7e88ac10b4b";
 
-    var cityAPIUrl = ("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey);
+    var cityAPIUrl = ("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey);
 
 
     // var weatherQueryURL = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + location.coords.latitude + "&lon=" + location.coords.longitude + "&units=imperial&exclude=hourly&appid=" + apiKey);
@@ -109,7 +109,7 @@ function fetchWeather(city) {
         var currentWindSpeed = response.wind.speed;
         // currentPercipitation 
         var currentHumidity = response.main.humidity;
-        var iconURL = ("http://openweathermap.org/img/w/" + currentIcon + ".png");
+        var iconURL = ("https://openweathermap.org/img/w/" + currentIcon + ".png");
 
 
         $(".currentTemp").text("Temperature: " + currentTemp + " F");
